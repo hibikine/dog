@@ -2,31 +2,36 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>のびるいぬ</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    body {
+      width: 100%;
+      overflow-x: scroll;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+    }
+    * {
+      white-space: nowrap;
+    }
+    button {
+      width: 100px;
+      height: 100px;
+    }
+    .suppadog {
+      font-size: 2rem;
+    }
+  </style>
 </head>
-  <script>
-  let count = 0;
-  </script>
-<style>
-* {
-white-space: nowrap;
-}
-  button {
-    width: 100px;
-    height: 100px;
-  }
-</style>
   <h1>のびるいぬ v0.0.1</h1>
   <p><span id="count-num">0</span>すっぱ = <span id="meter">0m</span></p>
-<p>⊂ﾟＵ┬<span id='dog'>─</span>┬~</p>
+<p class="suppadog">⊂ﾟＵ┬<span id='dog'>─</span>┬~</p>
 <p>
 <button onclick="suppa();">のばす</button>
 </p>
   <p id="place"></p>
-<p>投稿→<a id="twitter" href="">Twitter
-  </a></p>
+  <p><a id="twitter" href="">Twitterに投稿する</a></p>
   <script>
+    let count = 0;
     function generateTwitterHref(count) {
       $('#twitter').attr("href", 'https://twitter.com/?status=' + 'すっぱいぬを' + count + '回伸ばしました！ https://hibikine.me/dog/ #のびるいぬ');
     }
