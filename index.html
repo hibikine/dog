@@ -28,6 +28,9 @@ white-space: nowrap;
   <p id="place"></p>
   <p>投稿→<a id="twitter" href="">Twitter
   </a></p>
+  <form id="form" method="post" action="https://hibikine.me/dog/score.php">
+    <button type="submit">送信(すっぱリセット)</button>
+  </form>
   <div>
     <p>v0.0.5: タグが使われてたので修正</p>
     <p>v0.0.4: タグがふえた</p>
@@ -84,6 +87,13 @@ white-space: nowrap;
         lastPlacesIndex++;
       }
     }
+    $("#form").submit(function() {
+      $("<input>",{
+        type:"hidden",
+        name:"score",
+        value:count,
+      }).appendTo("#form");
+    })
     generateTwitterHref(0);
   </script>
 </html>
