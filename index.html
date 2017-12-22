@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+  <script>
+  let count = 0;
+  </script>
+<style>
+* {
+white-space: nowrap;
+}
+  button {
+    width: 100px;
+    height: 100px;
+  }
+</style>
+  <h1>のびるいぬ v0.0.1</h1>
+  <p><span id="count-num">0</span>すっぱ = <span id="meter">0m</span></p>
+<p>⊂ﾟＵ┬<span id='dog'>─</span>┬~</p>
+<p>
+<button onclick="suppa();">のばす</button>
+</p>
+  <p id="place"></p>
+<p>投稿→<a id="twitter" href="">Twitter
+  </a></p>
+  <script>
+    function suppa(){
+      console.log('suppa');
+      document.getElementById('dog').innerHTML += '─';
+      document.getElementById('count-num').innerHTML = ++count;
+      const meter = 1 + count / 2;
+      $('#meter').html(meter + 'm');
+    $('#twitter').attr("href", 'https://twitter.com/?status=' + 'すっぱいぬを' + count + '回伸ばしました！ https://hibikine.me/dog/ #のびるいぬ');
+      const places = [
+        {
+          length: 10,
+          name: 'へびすっぱいぬ'
+        },
+        {
+          length: 100,
+          name: 'へびすっぱいぬ'
+        },
+        {
+          length: 1000,
+          name: 'どらごんすっぱいぬ'
+        },
+        {
+          length:10000,
+          name: 'ゆめのなかのすっぱいぬ'
+        },
+        {
+          length: 100000,
+          name: 'いつかのすっぱいぬ'
+        },
+        {
+          length:10000000,
+          name:'すっぱいぬ…？'
+        },
+        {
+          length:10000000000000,
+          name: 'おめでとう！お前がすっぱいぬになるんだよ'
+        }
+      ];
+      let lastPlacesIndex = 0;
+      if (places[lastPlacesIndex].length <= meter) {
+        $('#place').html(places[lastPlacesIndex].name);
+        lastPlacesIndex++;
+      }
+
+  }
+  </script>
+</html>
