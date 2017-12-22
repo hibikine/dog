@@ -73,6 +73,7 @@ white-space: nowrap;
   <p id="place"></p>
   <p><a id="twitter" href="">Twitterに投稿する📣</a></p>
   <dl>
+    <dt>v0.0.8:</dt><dd>実績が解除されないバグを修正</dd>
     <dt>v0.0.7:</dt><dd>絵文字追加</dd>
     <dt>v0.0.6:</dt><dd>リファクタ</dd>
     <dt>v0.0.5:</dt><dd>タグが使われてたので修正</dd>
@@ -83,6 +84,7 @@ white-space: nowrap;
   </dl>
   <script>
     let count = 0;
+    let lastPlacesIndex = 0;
     const $dog = $('#dog');
     const $countNum = $('#count-num');
     function generateTwitterHref(count) {
@@ -124,7 +126,6 @@ white-space: nowrap;
           name: '🏆おめでとう！お前がすっぱいぬになるんだよ'
         }
       ];
-      let lastPlacesIndex = 0;
       if (places[lastPlacesIndex].length <= meter) {
         $('#place').html(places[lastPlacesIndex].name);
         lastPlacesIndex++;
