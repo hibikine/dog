@@ -27,13 +27,16 @@ white-space: nowrap;
 <p>投稿→<a id="twitter" href="">Twitter
   </a></p>
   <script>
+    function generateTwitterHref(count) {
+      $('#twitter').attr("href", 'https://twitter.com/?status=' + 'すっぱいぬを' + count + '回伸ばしました！ https://hibikine.me/dog/ #のびるいぬ');
+    }
     function suppa(){
       console.log('suppa');
       document.getElementById('dog').innerHTML += '─';
       document.getElementById('count-num').innerHTML = ++count;
+      generateTwitterHref(count)
       const meter = 1 + count / 2;
       $('#meter').html(meter + 'm');
-    $('#twitter').attr("href", 'https://twitter.com/?status=' + 'すっぱいぬを' + count + '回伸ばしました！ https://hibikine.me/dog/ #のびるいぬ');
       const places = [
         {
           length: 10,
@@ -69,7 +72,7 @@ white-space: nowrap;
         $('#place').html(places[lastPlacesIndex].name);
         lastPlacesIndex++;
       }
-
-  }
+    }
+    generateTwitterHref(0);
   </script>
 </html>
