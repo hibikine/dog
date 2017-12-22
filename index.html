@@ -22,16 +22,17 @@ white-space: nowrap;
     height: 100px;
   }
 </style>
-  <h1>のびるいぬ v0.0.4</h1>
+  <h1>のびるすっぱいぬ v0.0.4</h1>
   <p><span id="count-num">0</span>すっぱ = <span id="meter">0m</span></p>
 <p>⊂ﾟＵ┬<span id='dog'>─</span>┬~</p>
 <p>
 <button onclick="suppa();">のばす</button>
 </p>
   <p id="place"></p>
-<p>投稿→<a id="twitter" href="">Twitter
+  <p>投稿→<a id="twitter" href="">Twitter
   </a></p>
   <div>
+    <p>v0.0.5: タグが使われてたので修正</p>
     <p>v0.0.4: タグがふえた</p>
     <p>v0.0.3: すっぱTwitterのバグを直した</p>
     <p>v0.0.2: Twitterカード対応</p>
@@ -39,7 +40,7 @@ white-space: nowrap;
   </div>
   <script>
     function generateTwitterHref(count) {
-      $('#twitter').attr("href", 'https://twitter.com/?status=' + encodeURIComponent('すっぱいぬを' + count + '回伸ばしました！ https://hibikine.me/dog/ #のびるいぬ'));
+      $('#twitter').attr("href", 'https://twitter.com/?status=' + encodeURIComponent('すっぱいぬを' + count + '回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ'));
     }
     function suppa(){
       console.log('suppa');
