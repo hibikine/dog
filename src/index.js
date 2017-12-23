@@ -6,7 +6,7 @@ const $dog = $('#dog');
 const $countNum = $('#count-num');
 
 function generateTwitterHref(n) {
-  $('#twitter').attr('href', `https://twitter.com/?status=${encodeURIComponent(`すっぱいぬ🐶を${n}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`)}`);
+  $('#twitter').attr('href', `https://twitter.com/intent/tweet?text=${encodeURIComponent(`すっぱいぬ🐶を${n}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`)}`);
 }
 
 // eslint-disable-next-line no-unused-vars
