@@ -1,3 +1,11 @@
 module.exports = {
-  "presets": ["airbnb"],
+  "extends": "airbnb",
+  "rules": {
+    "no-mixed-operators": "off"
+  }
+  "globals": {
+    "window": true,
+    "document": true,
+    "$": true,
+  }
 };

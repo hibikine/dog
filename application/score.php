@@ -20,5 +20,5 @@ include('index.html');
   const ranking = <?=json_encode(array_map(trim, array_slice($lines, 0, 5)))?>;
   const lastScore = <?=$score?>;
   const rank = <?=$i?>;
-  showRanking(ranking, lastScore, rank);
+  window.showRanking(ranking, lastScore, rank);
 </script>
