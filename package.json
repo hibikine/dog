@@ -10,6 +10,6 @@
   },
   "scripts": {
     "start": "parcel index.html --out-dir dog",
-    "build": "rm -rf dog/ && cp application/* dog/ && parcel build index.html --out-dir dog"
+    "build": "rm -rf dog/ && mkdir dog && cp application/* dog/ && parcel build index.html --out-dir dog"
   }
 }
