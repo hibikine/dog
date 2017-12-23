@@ -95,11 +95,11 @@ white-space: nowrap;
         value:count,
       }).appendTo("#form");
     })
-    generateTwitterHref(0);
     function showRanking(ranking, lastScore, rank) {
       const rankingList = $('<ol></ol>');
       rankingList.html(ranking.map(i => $(`<li>${i}</li>`)));
       $('#ranking').html(rankingList)
     }
+    generateTwitterHref(0);
   </script>
 </html>
