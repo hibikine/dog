@@ -26,6 +26,7 @@ $('#form').submit(() => {
     name: 'score',
     value: count,
   }).appendTo('#form');
+  gtag('event', 'send_rank');
 });
 
 // eslint-disable-next-line no-unused-vars

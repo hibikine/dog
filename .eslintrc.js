@@ -7,5 +7,6 @@ module.exports = {
     "window": true,
     "document": true,
     "$": true,
+    "gtag": true,
   }
 };
