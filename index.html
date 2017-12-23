@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42863170-9"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-42863170-9');
+
   </script>
 
   <meta charset="UTF-8">
@@ -19,149 +24,42 @@
   <meta name="twitter:image" content="https://hibikine.me/dog/dog.png" />
   <title>のびるいぬ</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <style>
-    @font-face {
-      font-family: MyFontFamily;
-      font-weight: bold;
-      src: local("Hiragino Kaku Gothic ProN"),
-           local("Meiryo Bold");
-    }
-
-    @font-face {
-      font-family: MyFontFamily;
-      src: local("Segoe UI Emoji"),
-           local("Segoe UI Symbol"),
-           local("Apple Color Emoji"),
-           local("Noto Color Emoji"),
-           local("Noto Emoji");
-      unicode-range: /*U+23, U+2A, U+30-39,*/ U+A9, U+AE, U+200D, U+203C, U+2049, U+20E3, U+2122, U+2139, U+2194-2199, U+21A9-21AA, U+231A-231B, U+2328, U+23CF, U+23E9-23F3, U+23F8-23FA, U+24C2, U+25AA-25AB, U+25B6, U+25C0, U+25FB-25FE, U+2600-2604, U+260E, U+2611, U+2614-2615, U+2618, U+261D, U+2620, U+2622-2623, U+2626, U+262A, U+262E-262F, U+2638-263A, U+2640, U+2642, U+2648-2653, U+2660, U+2663, U+2665-2666, U+2668, U+267B, U+267F, U+2692-2697, U+2699, U+269B-269C, U+26A0-26A1, U+26AA-26AB, U+26B0-26B1, U+26BD-26BE, U+26C4-26C5, U+26C8, U+26CE-26CF, U+26D1, U+26D3-26D4, U+26E9-26EA, U+26F0-26F5, U+26F7-26FA, U+26FD, U+2702, U+2705, U+2708-270D, U+270F, U+2712, U+2714, U+2716, U+271D, U+2721, U+2728, U+2733-2734, U+2744, U+2747, U+274C, U+274E, U+2753-2755, U+2757, U+2763-2764, U+2795-2797, U+27A1, U+27B0, U+27BF, U+2934-2935, U+2B05-2B07, U+2B1B-2B1C, U+2B50, U+2B55, U+3030, U+303D, U+3297, U+3299, U+FE0F, U+1F004, U+1F0CF, U+1F170-1F171, U+1F17E-1F17F, U+1F18E, U+1F191-1F19A, U+1F1E6-1F1FF, U+1F201-1F202, U+1F21A, U+1F22F, U+1F232-1F23A, U+1F250-1F251, U+1F300-1F321, U+1F324-1F393, U+1F396-1F397, U+1F399-1F39B, U+1F39E-1F3F0, U+1F3F3-1F3F5, U+1F3F7-1F4FD, U+1F4FF-1F53D, U+1F549-1F54E, U+1F550-1F567, U+1F56F-1F570, U+1F573-1F57A, U+1F587, U+1F58A-1F58D, U+1F590, U+1F595-1F596, U+1F5A4-1F5A5, U+1F5A8, U+1F5B1-1F5B2, U+1F5BC, U+1F5C2-1F5C4, U+1F5D1-1F5D3, U+1F5DC-1F5DE, U+1F5E1, U+1F5E3, U+1F5E8, U+1F5EF, U+1F5F3, U+1F5FA-1F64F, U+1F680-1F6C5, U+1F6CB-1F6D2, U+1F6E0-1F6E5, U+1F6E9, U+1F6EB-1F6EC, U+1F6F0, U+1F6F3-1F6F8, U+1F910-1F93A, U+1F93C-1F93E, U+1F940-1F945, U+1F947-1F94C, U+1F950-1F96B, U+1F980-1F997, U+1F9C0, U+1F9D0-1F9E6, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073-E0074, U+E0077, U+E007F;
-    }
-
-    @font-face {
-      font-family: MyFontFamily;
-      font-weight: bold;
-      src: local("Segoe UI Emoji"),
-           local("Segoe UI Symbol"),
-           local("Apple Color Emoji"),
-           local("Noto Color Emoji")
-           local("Noto Emoji");
-      unicode-range: /*U+23, U+2A, U+30-39,*/ U+A9, U+AE, U+200D, U+203C, U+2049, U+20E3, U+2122, U+2139, U+2194-2199, U+21A9-21AA, U+231A-231B, U+2328, U+23CF, U+23E9-23F3, U+23F8-23FA, U+24C2, U+25AA-25AB, U+25B6, U+25C0, U+25FB-25FE, U+2600-2604, U+260E, U+2611, U+2614-2615, U+2618, U+261D, U+2620, U+2622-2623, U+2626, U+262A, U+262E-262F, U+2638-263A, U+2640, U+2642, U+2648-2653, U+2660, U+2663, U+2665-2666, U+2668, U+267B, U+267F, U+2692-2697, U+2699, U+269B-269C, U+26A0-26A1, U+26AA-26AB, U+26B0-26B1, U+26BD-26BE, U+26C4-26C5, U+26C8, U+26CE-26CF, U+26D1, U+26D3-26D4, U+26E9-26EA, U+26F0-26F5, U+26F7-26FA, U+26FD, U+2702, U+2705, U+2708-270D, U+270F, U+2712, U+2714, U+2716, U+271D, U+2721, U+2728, U+2733-2734, U+2744, U+2747, U+274C, U+274E, U+2753-2755, U+2757, U+2763-2764, U+2795-2797, U+27A1, U+27B0, U+27BF, U+2934-2935, U+2B05-2B07, U+2B1B-2B1C, U+2B50, U+2B55, U+3030, U+303D, U+3297, U+3299, U+FE0F, U+1F004, U+1F0CF, U+1F170-1F171, U+1F17E-1F17F, U+1F18E, U+1F191-1F19A, U+1F1E6-1F1FF, U+1F201-1F202, U+1F21A, U+1F22F, U+1F232-1F23A, U+1F250-1F251, U+1F300-1F321, U+1F324-1F393, U+1F396-1F397, U+1F399-1F39B, U+1F39E-1F3F0, U+1F3F3-1F3F5, U+1F3F7-1F4FD, U+1F4FF-1F53D, U+1F549-1F54E, U+1F550-1F567, U+1F56F-1F570, U+1F573-1F57A, U+1F587, U+1F58A-1F58D, U+1F590, U+1F595-1F596, U+1F5A4-1F5A5, U+1F5A8, U+1F5B1-1F5B2, U+1F5BC, U+1F5C2-1F5C4, U+1F5D1-1F5D3, U+1F5DC-1F5DE, U+1F5E1, U+1F5E3, U+1F5E8, U+1F5EF, U+1F5F3, U+1F5FA-1F64F, U+1F680-1F6C5, U+1F6CB-1F6D2, U+1F6E0-1F6E5, U+1F6E9, U+1F6EB-1F6EC, U+1F6F0, U+1F6F3-1F6F8, U+1F910-1F93A, U+1F93C-1F93E, U+1F940-1F945, U+1F947-1F94C, U+1F950-1F96B, U+1F980-1F997, U+1F9C0, U+1F9D0-1F9E6, U+E0062-E0063, U+E0065, U+E0067, U+E006C, U+E006E, U+E0073-E0074, U+E0077, U+E007F;
-    }
-
-    body {
-      width: 100%;
-      overflow-x: scroll;
-      font-family: MyFontFamily, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
-    }
-    * {
-      white-space: nowrap;
-    }
-    button {
-      width: 100px;
-      height: 100px;
-    }
-    .suppadog {
-      font-size: 2rem;
-    }
-  </style>
+  <link rel="stylesheet" href="./scss/index.scss" />
 </head>
-<style>
-* {
-white-space: nowrap;
-}
-  button {
-    width: 100px;
-    height: 100px;
-  }
-</style>
-  <h1>のびるすっぱいぬ🐶 v0.1.0</h1>
-  <p><span id="count-num">0</span>すっぱ = <span id="meter">0m</span></p>
+<h1>のびるすっぱいぬ🐶 v0.1.0</h1>
+<p><span id="count-num">0</span>すっぱ = <span id="meter">0m</span></p>
 <p class="suppadog">⊂ﾟＵ┬<span id="dog">─</span>┬~</p>
 <p>
-<button onclick="suppa();">のばす🐾</button>
+  <button onclick="suppa();">のばす🐾</button>
 </p>
-  <p id="place"></p>
-  <p><a id="twitter" href="">Twitterに投稿する📣</a></p>
-  <form id="form" method="post" action="https://hibikine.me/dog/score.php">
-    <button type="submit">送信(すっぱリセット)</button>
-  </form>
-  <div id="ranking"></div>
-  <dl>
-    <dt>v0.1.0:</dt><dd>ランキング機能追加</dd>
-    <dt>v0.0.9:</dt><dd>絵文字さらにましまし</dd>
-    <dt>v0.0.8:</dt><dd>実績が解除されないバグを修正</dd>
-    <dt>v0.0.7:</dt><dd>絵文字追加</dd>
-    <dt>v0.0.6:</dt><dd>リファクタ</dd>
-    <dt>v0.0.5:</dt><dd>タグが使われてたので修正</dd>
-    <dt>v0.0.4:</dt><dd>タグがふえた</dd>
-    <dt>v0.0.3:</dt><dd>すっぱTwitterのバグを直した</dd>
-    <dt>v0.0.2:</dt><dd>Twitterカード対応</dd>
-    <dt>v0.0.1:</dt><dd>バージョニング</dd>
-  </dl>
-  <script>
-    let count = 0;
-    let lastPlacesIndex = 0;
-    const $dog = $('#dog');
-    const $countNum = $('#count-num');
-    function generateTwitterHref(count) {
-      $('#twitter').attr("href", 'https://twitter.com/?status=' + encodeURIComponent('すっぱいぬ🐶を' + count + '回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ'));
-    }
-    function suppa(){
-      $dog.html($dog.html() + '─');
-      $countNum.html(++count);
-      generateTwitterHref(count)
-      const meter = 1 + count / 2;
-      $('#meter').html(meter + 'm');
-      const places = [
-        {
-          length: 10,
-          name: '🏆へびすっぱいぬ🐍'
-        },
-        {
-          length: 100,
-          name: '🏆へびすっぱいぬ🐍'
-        },
-        {
-          length: 1000,
-          name: '🏆どらごんすっぱいぬ🐉'
-        },
-        {
-          length:10000,
-          name: '🏆ゆめのなかのすっぱいぬ☽'
-        },
-        {
-          length: 100000,
-          name: '🏆いつかのすっぱいぬ'
-        },
-        {
-          length:10000000,
-          name:'🏆すっぱいぬ…？'
-        },
-        {
-          length:10000000000000,
-          name: '🏆おめでとう！お前がすっぱいぬになるんだよ'
-        }
-      ];
-      if (places[lastPlacesIndex].length <= meter) {
-        $('#place').html(places[lastPlacesIndex].name);
-        lastPlacesIndex++;
-      }
-    }
-    $("#form").submit(function() {
-      $("<input>",{
-        type:"hidden",
-        name:"score",
-        value:count,
-      }).appendTo("#form");
-    })
-    function showRanking(ranking, lastScore, rank) {
-      const rankingList = $('<ol></ol>');
-      rankingList.html(ranking.map(i => $(`<li>${i}</li>`)));
-      const rankingHeader = $('<h2>すっぱランキング</h2>');
-      const rankingWrapper = $('#ranking');
-      rankingWrapper.append(rankingHeader);
-      rankingWrapper.append(rankingList);
-    }
-    generateTwitterHref(0);
-  </script>
+<p id="place"></p>
+<p><a id="twitter" href="">Twitterに投稿する📣</a></p>
+<form id="form" method="post" action="https://hibikine.me/dog/score.php">
+  <button type="submit">送信(すっぱリセット)</button>
+</form>
+<div id="ranking"></div>
+<dl>
+  <dt>v0.1.0:</dt>
+  <dd>ランキング機能追加</dd>
+  <dt>v0.0.9:</dt>
+  <dd>絵文字さらにましまし</dd>
+  <dt>v0.0.8:</dt>
+  <dd>実績が解除されないバグを修正</dd>
+  <dt>v0.0.7:</dt>
+  <dd>絵文字追加</dd>
+  <dt>v0.0.6:</dt>
+  <dd>リファクタ</dd>
+  <dt>v0.0.5:</dt>
+  <dd>タグが使われてたので修正</dd>
+  <dt>v0.0.4:</dt>
+  <dd>タグがふえた</dd>
+  <dt>v0.0.3:</dt>
+  <dd>すっぱTwitterのバグを直した</dd>
+  <dt>v0.0.2:</dt>
+  <dd>Twitterカード対応</dd>
+  <dt>v0.0.1:</dt>
+  <dd>バージョニング</dd>
+</dl>
+<script src='./src/index.js'></script>
+
 </html>

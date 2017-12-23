@@ -6,6 +6,11 @@
   "author": "Hibikine Kage <goodsmile314159@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
     "parcel-bundler": "^1.3.0"
   },
   "scripts": {

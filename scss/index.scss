@@ -1,0 +1,17 @@
+@import "./fonts";
+
+body {
+  width: 100%;
+  overflow-x: scroll;
+  font-family: MyFontFamily, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+}
+* {
+  white-space: nowrap;
+}
+button {
+  width: 100px;
+  height: 100px;
+}
+.suppadog {
+  font-size: 2rem;
+}
