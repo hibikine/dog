@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "parcel index.html --out-dir dog &",
-    "build": "rm -rf dog/ && mkdir dog && cp application/* dog/ && parcel build index.html --out-dir dog",
+    "build": "cp -rf application/* dog/ && parcel build index.html --out-dir dog",
     "docker-run": "docker build -t dog . && docker run -d --name dog dog",
     "docker-start": "docker start dog",
     "docker-stop": "docker stop dog",
