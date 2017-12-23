@@ -1,3 +1,5 @@
+import changeName from './names'
+
 let count = 0;
 let lastNameIndex = 0;
 const $dog = $('#dog');
@@ -5,43 +7,6 @@ const $countNum = $('#count-num');
 
 function generateTwitterHref(n) {
   $('#twitter').attr('href', `https://twitter.com/?status=${encodeURIComponent(`すっぱいぬ🐶を${n}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`)}`);
-}
-
-function changeName(meter) {
-  const names = [
-    {
-      length: 10,
-      name: '🏆へびすっぱいぬ🐍',
-    },
-    {
-      length: 100,
-      name: '🏆へびすっぱいぬ🐍',
-    },
-    {
-      length: 1000,
-      name: '🏆どらごんすっぱいぬ🐉',
-    },
-    {
-      length: 10000,
-      name: '🏆ゆめのなかのすっぱいぬ☽',
-    },
-    {
-      length: 100000,
-      name: '🏆いつかのすっぱいぬ',
-    },
-    {
-      length: 10000000,
-      name: '🏆すっぱいぬ…？',
-    },
-    {
-      length: 10000000000000,
-      name: '🏆おめでとう！お前がすっぱいぬになるんだよ',
-    },
-  ];
-  if (names[lastNameIndex].length <= meter) {
-    $('#place').html(names[lastNameIndex].name);
-    lastNameIndex += 1;
-  }
 }
 
 // eslint-disable-next-line no-unused-vars
