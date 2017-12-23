@@ -31,6 +31,7 @@ white-space: nowrap;
   <form id="form" method="post" action="https://hibikine.me/dog/score.php">
     <button type="submit">送信(すっぱリセット)</button>
   </form>
+  <div id="ranking"></div>
   <div>
     <p>v0.0.5: タグが使われてたので修正</p>
     <p>v0.0.4: タグがふえた</p>
@@ -95,5 +96,10 @@ white-space: nowrap;
       }).appendTo("#form");
     })
     generateTwitterHref(0);
+    function showRanking(ranking, lastScore, rank) {
+      const rankingList = $('<ol></ol>');
+      rankingList.html(ranking.map(i => $(`<li>${i}</li>`)));
+      $('#ranking').html(rankingList)
+    }
   </script>
 </html>
