@@ -1,0 +1,15 @@
+{
+  "name": "dog",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "git@github.com:HibikineKage/dog.git",
+  "author": "Hibikine Kage <goodsmile314159@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.3.0"
+  },
+  "scripts": {
+    "start": "parcel index.html --out-dir dog",
+    "build": "parcel build index.html --out-dir dog"
+  }
+}
