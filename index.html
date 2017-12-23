@@ -85,6 +85,7 @@ white-space: nowrap;
   <form id="form" method="post" action="https://hibikine.me/dog/score.php">
     <button type="submit">送信(すっぱリセット)</button>
   </form>
+  <div id="ranking"></div>
   <dl>
     <dt>v0.1.0:</dt><dd>ランキング機能追加</dd>
     <dt>v0.0.9:</dt><dd>絵文字さらにましまし</dd>
@@ -156,7 +157,10 @@ white-space: nowrap;
     function showRanking(ranking, lastScore, rank) {
       const rankingList = $('<ol></ol>');
       rankingList.html(ranking.map(i => $(`<li>${i}</li>`)));
-      $('#ranking').html(rankingList)
+      const rankingHeader = $('<h2>すっぱランキング</h2>');
+      const rankingWrapper = $('#ranking');
+      rankingWrapper.append(rankingHeader);
+      rankingWrapper.append(rankingList);
     }
     generateTwitterHref(0);
   </script>

@@ -5,7 +5,6 @@ $score = $_POST['score'];
 for($i = 0; $i < count($lines); ++$i) {
   if ((int)$lines[$i] < $score) {
     array_splice($lines, $i, 0, $score . "\n");
-    var_dump($lines);
     break;
   }
 }
@@ -18,7 +17,7 @@ include('index.html');
 
 
 <script>
-  const ranking = <?=json_encode(array_slice($lines, 5))?>;
+  const ranking = <?=json_encode(array_map(trim, array_slice($lines, 0, 5)))?>;
   const lastScore = <?=$score?>;
   const rank = <?=$i?>;
   showRanking(ranking, lastScore, rank);
