@@ -1,11 +1,8 @@
+let lastNameIndex = 0;
 export default function changeName(meter) {
   const names = [
     {
       length: 10,
-      name: '🏆へびすっぱいぬ🐍',
-    },
-    {
-      length: 100,
       name: '🏆へびすっぱいぬ🐍',
     },
     {
