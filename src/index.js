@@ -58,7 +58,7 @@ $('#form').submit(() => {
 });
 
 // eslint-disable-next-line no-unused-vars
-window.showRanking = (ranking, lastScore, rank)  => {
+window.showRanking = (ranking, lastScore, rank) => {
   const rankingHeader = $('<h2>すっぱランキング</h2>');
   const rankingList = $('<ol></ol>');
   rankingList.html(ranking.map(i => $(`<li>${i}</li>`)));
