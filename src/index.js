@@ -8,7 +8,7 @@ const dogStatus = {
   defaultLength: 10, // 元の長さ
   length: 10, // 現在の長さ
   acceleration: 0, // 尻の加速度
-  unit: 25, // px/カウント
+  unit: 20, // px/カウント
   weight: 5, // 重さ(単位適当)
   friction: 0.9, // 摩擦係数
 };
@@ -27,9 +27,13 @@ function drawDog() {
   dogStatus.acceleration += springForce / dogStatus.weight;
   // 摩擦
   dogStatus.acceleration *= dogStatus.friction;
-
   // 長さを図る
   dogStatus.length += dogStatus.acceleration;
+  // デフォルトの長さより短くならないように
+  if (dogStatus.length < dogStatus.defaultLength) {
+    dogStatus.length = dogStatus.defaultLength;
+    dogStatus.acceleration *= -1;
+  }
   $dog.css('width', `${dogStatus.length}px`);
   window.requestAnimationFrame(drawDog);
 }
@@ -54,7 +58,7 @@ $('#form').submit(() => {
 });
 
 // eslint-disable-next-line no-unused-vars
-window.showRanking = (ranking, lastScore, rank) => {
+window.showRanking = (ranking, lastScore, rank)  => {
   const rankingHeader = $('<h2>すっぱランキング</h2>');
   const rankingList = $('<ol></ol>');
   rankingList.html(ranking.map(i => $(`<li>${i}</li>`)));
