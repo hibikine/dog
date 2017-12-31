@@ -12,13 +12,12 @@ if(count($lines) === $i) {
   $lines = array_merge($lines, [$score . "\n"]);
 }
 file_put_contents($filename, $lines);
-include('index.html');
-?>
 
+$json = [
+  "ranking" => array_map(trim, array_slice($lines, 0, 5)),
+  "lastScore" => $score,
+  "rank" => $i,
+];
 
-<script>
-  const ranking = <?=json_encode(array_map(trim, array_slice($lines, 0, 5)))?>;
-  const lastScore = <?=$score?>;
-  const rank = <?=$i?>;
-  window.showRanking(ranking, lastScore, rank);
-</script>
+header("Content-Type: application/json; charset=utf-8");
+echo json_encode($json);
