@@ -24,46 +24,47 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <link rel="stylesheet" href="./scss/index.scss" />
 </head>
-<h1>のびるすっぱいぬ🐶 v0.1.1</h1>
+<h1>のびるすっぱいぬ🐶<span class="title-version">v0.2.0</span></h1>
 <p><span id="count-num">0</span>すっぱ = <span id="meter">0m</span></p>
 <p class="suppadog">
   <img src="dog_front.svg" height="64"><img src="dog_center_.svg" id="dog" height="64"><img src="dog_back.svg" height="64">
 </p>
-<p>
-  <button id="extend">のばす🐾</button>
-</p>
-<p id="place"></p>
-<p><a id="twitter" href="" target="_blank">長さをTwitterに書き込む📣</a></p>
-<form id="form" method="post" action="https://hibikine.me/dog/score.php">
-  <button type="submit">送信<br>(すっぱリセット)</button>
-</form>
+<div>
+  <button id="twitter" class="btn" type="button">つぶやく📣</button>
+  <form id="form" method="post" action="http://localhost:8090/score.php">
+    <button id="reset" type="submit" class="btn" disabled>送信🏆<br>すっぱ<br>リセット</button>
+  </form>
+  <button id="extend" class="btn primary" type="button">のばす🐾</button>
+</div>
 <div id="ranking"></div>
-<dl>
-  <dt>v0.2:</dt>
-  <dd>2018年度版🐶豪華犬</dd>
-  <dt>v0.1.1:</dt>
-  <dd>あなたのランクが出るようになった</dd>
-  <dt>v0.1.0:</dt>
-  <dd>ランキング機能追加</dd>
-  <dt>v0.0.9:</dt>
-  <dd>絵文字さらにましまし</dd>
-  <dt>v0.0.8:</dt>
-  <dd>実績が解除されないバグを修正</dd>
-  <dt>v0.0.7:</dt>
-  <dd>絵文字追加</dd>
-  <dt>v0.0.6:</dt>
-  <dd>リファクタ</dd>
-  <dt>v0.0.5:</dt>
-  <dd>タグが使われてたので修正</dd>
-  <dt>v0.0.4:</dt>
-  <dd>タグがふえた</dd>
-  <dt>v0.0.3:</dt>
-  <dd>すっぱTwitterのバグを直した</dd>
-  <dt>v0.0.2:</dt>
-  <dd>Twitterカード対応</dd>
-  <dt>v0.0.1:</dt>
-  <dd>バージョニング</dd>
-</dl>
+<small>
+  <dl>
+    <dt>v0.2.0:</dt>
+    <dd>2018年度版🐶豪華犬</dd>
+    <dt>v0.1.1:</dt>
+    <dd>あなたのランクが出るようになった</dd>
+    <dt>v0.1.0:</dt>
+    <dd>ランキング機能追加</dd>
+    <dt>v0.0.9:</dt>
+    <dd>絵文字さらにましまし</dd>
+    <dt>v0.0.8:</dt>
+    <dd>実績が解除されないバグを修正</dd>
+    <dt>v0.0.7:</dt>
+    <dd>絵文字追加</dd>
+    <dt>v0.0.6:</dt>
+    <dd>リファクタ</dd>
+    <dt>v0.0.5:</dt>
+    <dd>タグが使われてたので修正</dd>
+    <dt>v0.0.4:</dt>
+    <dd>タグがふえた</dd>
+    <dt>v0.0.3:</dt>
+    <dd>すっぱTwitterのバグを直した</dd>
+    <dt>v0.0.2:</dt>
+    <dd>Twitterカード対応</dd>
+    <dt>v0.0.1:</dt>
+    <dd>バージョニング</dd>
+  </dl>
+</small>
 <script src='./src/index.js'></script>
 
 </html>

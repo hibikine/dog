@@ -3,15 +3,75 @@
 body {
   font-family: MyFontFamily, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
 }
-button {
+
+.btn {
+  display: inline-block;
+  margin: 6px;
+  font-size: 0.7rem;
+  line-height: 1.42;
+  padding: 1.2em 1.6em;
+  font-weight: normal;
+  border-width: 0;
+  border-style: solid;
+  background: transparent;
+  background: #eeeeee;
+  color: #000;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: bottom;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 -2px 0 0 rgba(0, 0, 0, 0.3) inset;
+  text-decoration: none;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  tap-highlight-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  width: 100px;
+  height:100px;
+
+  :active{
+    transition-duration: 0.1s;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3) inset;
+    transform: translateY(1px)
+  }
+}
+.primary {
+  font-size: 1rem;
   background-color: #00BCD4;
   color: #fff;
-  border: none;
-  width: 100px;
-  height: 100px;
 }
+.btn[disabled] {
+  color: #aaa;
+}
+
+
+#form {
+  display: inline;
+}
+
+.title-version {
+  font-size: 0.8rem;
+}
+
 .suppadog {
   overflow: auto;
   white-space: nowrap;
   font-size: 2rem;
+}
+
+ol {
+  :nth-child(1):after {
+    content: "🥇";
+  }
+  :nth-child(2):after {
+    content: "🥈";
+  }
+  :nth-child(3):after {
+    content: "🥉";
+  }
+  li:before {
+    content: "　";
+  }
 }
