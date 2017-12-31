@@ -7,6 +7,8 @@ define('DAILY_RANKING_UPDATE_FILE', './daily-update.txt');
 define('HOURLY_RANKING_UPDATE_FILE', './hourly-update.txt');
 define('SCORE_TIMEZONE', 'Asia/Tokyo');
 
+date_default_timezone_set(SCORE_TIMEZONE);
+
 // 現在時刻のDateTimeをTimezone設定状態で返す
 function getNow() {
   $now = new DateTime();
