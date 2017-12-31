@@ -1,5 +1,6 @@
 import changeName from './names';
 import Dog from './dog';
+import showVersion from './version';
 
 let count = 0;
 let lastNameIndex = 0;
@@ -61,6 +62,7 @@ function showRanking(data) {
   rankingWrapper.append(hourlyRanking);
 }
 
+showVersion();
 const dog = new Dog();
 function mainLoop() {
   dog.updateDog(count);
