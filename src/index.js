@@ -1,37 +1,9 @@
-import changeName from './names'
+import changeName from './names';
+import Dog from './dog';
 
 let count = 0;
 let lastNameIndex = 0;
-const $dog = $('#dog');
 const $countNum = $('#count-num');
-const dogStatus = {
-  defaultLength: 10, // 元の長さ
-  length: 10, // 現在の長さ
-  acceleration: 0, // 尻の加速度
-  unit: 20, // px/カウント
-  weight: 5, // 重さ(単位適当)
-  friction: 0.9, // 摩擦係数
-};
-
-function drawDog() {
-  // 目指す長さ
-  const targetDogLength = dogStatus.defaultLength + count * dogStatus.unit;
-  // バネの強さ
-  const springForce = targetDogLength - dogStatus.length;
-  // 加速度を計算
-  dogStatus.acceleration += springForce / dogStatus.weight;
-  // 摩擦
-  dogStatus.acceleration *= dogStatus.friction;
-  // 長さを図る
-  dogStatus.length += dogStatus.acceleration;
-  // デフォルトの長さより短くならないように
-  if (dogStatus.length < dogStatus.defaultLength) {
-    dogStatus.length = dogStatus.defaultLength;
-    dogStatus.acceleration *= -1;
-  }
-  $dog.css('width', `${dogStatus.length}px`);
-  window.requestAnimationFrame(drawDog);
-}
 
 // eslint-disable-next-line no-unused-vars
 $('#extend').click(() => {
@@ -62,6 +34,7 @@ function updateCount(count) {
   $('#reset').prop("disabled", count == 0)
   changeName(meter);
 }
+
 // eslint-disable-next-line no-unused-vars
 function showRanking(ranking, lastScore, rank) {
   const rankingHeader = $('<h2>すっぱランキング</h2>');
@@ -75,4 +48,13 @@ function showRanking(ranking, lastScore, rank) {
   rankingWrapper.append(yourRank);
 }
 
-drawDog();
+const dog = new Dog();
+function mainLoop() {
+  dog.updateDog(count);
+  dog.drawDog();
+  window.requestAnimationFrame(() => {
+    mainLoop();
+  });
+}
+mainLoop();
+
