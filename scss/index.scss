@@ -60,18 +60,26 @@ body {
   white-space: nowrap;
   font-size: 2rem;
 }
-
-ol {
-  :nth-child(1):after {
-    content: "🥇";
-  }
-  :nth-child(2):after {
-    content: "🥈";
-  }
-  :nth-child(3):after {
-    content: "🥉";
-  }
-  li:before {
-    content: "　";
+#ranking{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  & > div {
+    margin-right: 20px;
+    width: 220px;
+    ol {
+      :nth-child(1):after {
+        content: "🥇";
+      }
+      :nth-child(2):after {
+        content: "🥈";
+      }
+      :nth-child(3):after {
+        content: "🥉";
+      }
+      li:before {
+        content: "　";
+      }
+    }
   }
 }
