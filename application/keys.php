@@ -1,0 +1,5 @@
+<?php
+define('CONSUMER_KEY', 'ISg0sBdwfgQ7q6hkmYSfVOXG4');
+define('CONSUMER_SECRET', 'WsRzVouI32eOxEjsWVTndo8qz90PPSu50qV60JVUjHnV02inZV');
+define('ACCESS_TOKEN', '1077705918-EHSL2kmM4VdqvZWimtm5gfS1CGI4rAh8nDhDaaH');
+define('ACCESS_TOKEN_SECRET', 'oOoA65CkR5WllxXFDnOtvJGYkjzhnfbTbRwf8YbGRNazu');

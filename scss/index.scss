@@ -83,3 +83,22 @@ body {
     }
   }
 }
+#credit-list {
+  text-align: center;
+  dt {
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-top: 20px;
+  }
+  div {
+    display: flex;
+    justify-content: space-evenly;
+    dd {
+      margin: 0;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
