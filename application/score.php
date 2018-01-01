@@ -12,7 +12,7 @@ date_default_timezone_set(SCORE_TIMEZONE);
 // 現在時刻のDateTimeをTimezone設定状態で返す
 function getNow() {
   $now = new DateTime();
-  $now->setTimeZone( new DateTimeZone(SCORE_TIMEZONE));
+  $a = $now->setTimeZone(new DateTimeZone(SCORE_TIMEZONE));
   return $now;
 }
 
@@ -25,14 +25,14 @@ function isUpdate($file) {
   }
   // UnixtimeからDateTimeに変換して比較
   $date = new DateTime('@' . $raw);
-  return $date < new DateTime();
+  $date->setTimeZone(new DateTimeZone(SCORE_TIMEZONE));
+  return $date < getNow();
 }
 
 // ランキングファイルを消し、次回アップデートの日時を設定
 function update($rankingFile, $nextUpdateFile, $datetime) {
   // ランキングを全て削除
   file_put_contents($rankingFile, '');
-  
   // Unixtimeで書き込み
   file_put_contents($nextUpdateFile, $datetime->format('U'));
 }
@@ -43,8 +43,8 @@ define('DAILY_RESET_HOUR', 5);
 // デイリーランキングの次回更新日時を計算
 function calcNextDailyUpdateTime() {
   $updateTime = getNow();
-  if (DAILY_RESET_HOUR < $updateTime->format('h')) {
-    $updateTime->add(new DateInterval('1d'));
+  if (DAILY_RESET_HOUR < (int)$updateTime->format('H')) {
+    $updateTime->add(new DateInterval('P1D'));
   }
   $updateTime->setTime(DAILY_RESET_HOUR, 0);
   return $updateTime;
@@ -53,7 +53,7 @@ function calcNextDailyUpdateTime() {
 // 毎時ランキングの次回更新日時を計算
 function calcNextHourlyUpdateTime() {
   $updateTime = getNow();
-  $updateTime->setTime($updateTime->format('h') + 1, 0);
+  $updateTime->setTime($updateTime->format('H') + 1, 0);
   return $updateTime;
 }
 
