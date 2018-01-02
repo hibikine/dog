@@ -1,0 +1,16 @@
+{
+    "name": "hibikinekage/dog",
+    "require": {
+        "abraham/twitteroauth": "^0.7.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hibikine Kage",
+            "email": "goodsmile314159@gmail.com"
+        }
+    ],
+    "config": {
+        "vendor-dir": "application/vendor"
+    }
+}
