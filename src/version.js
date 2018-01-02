@@ -18,7 +18,8 @@ const versions = {
 };
 
 export default function showVersion($titleVersion, $versionLog) {
-  $titleVersion.text(Object.keys(versions)[0]);
+  versionText = Object.keys(versions)[0] || "";
+  $titleVersion.text(`v${versionText}`);
 
   Object.entries(versions).reduce(($version, [key, value]) => {
     $version.append($(`<dt>v${key}:</dt>`));
