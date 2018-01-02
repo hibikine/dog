@@ -11,7 +11,7 @@ $('#extend').click(() => {
 });
 
 $('#twitter').click(() => {
-  open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`すっぱいぬ🐶を${counter.count}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`)}`, '_blank');
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`すっぱいぬ🐶を${counter.count}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`)}`, '_blank');
 });
 
 initForm(counter);
