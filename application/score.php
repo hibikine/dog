@@ -12,11 +12,14 @@ date_default_timezone_set(SCORE_TIMEZONE);
 // 現在時刻のDateTimeをTimezone設定状態で返す
 function getNow() {
   $now = new DateTime();
-  $a = $now->setTimeZone(new DateTimeZone(SCORE_TIMEZONE));
   return $now;
 }
 
-// ランキングファイルを消すべきかどうか判断
+/**
+ * ランキングファイルを消すべきかどうか判断
+ * @param $file string ranking update file
+ * @return bool
+ */
 function isUpdate($file) {
   $raw = file_get_contents($file);
   // ランキングファイルの存在チェック
@@ -29,7 +32,12 @@ function isUpdate($file) {
   return $date < getNow();
 }
 
-// ランキングファイルを消し、次回アップデートの日時を設定
+/**
+ * ランキングファイルを消し、次回アップデートの日時を設定
+ * @param $rankingFile
+ * @param $nextUpdateFile
+ * @param $datetime DateTime
+ */
 function update($rankingFile, $nextUpdateFile, $datetime) {
   // ランキングを全て削除
   file_put_contents($rankingFile, '');
@@ -53,7 +61,7 @@ function calcNextDailyUpdateTime() {
 // 毎時ランキングの次回更新日時を計算
 function calcNextHourlyUpdateTime() {
   $updateTime = getNow();
-  $updateTime->setTime($updateTime->format('H') + 1, 0);
+  $updateTime->setTime((int)$updateTime->format('H') + 1, 0);
   return $updateTime;
 }
 
@@ -71,7 +79,7 @@ function addRanking($filename, $score) {
   }
   file_put_contents($filename, $lines, LOCK_EX);
   return [
-    "ranking" => array_map(trim, array_slice($lines, 0, 5)),
+    "ranking" => array_map(function($i){ return trim($i); }, array_slice($lines, 0, 5)),
     "rank" => $i,
   ];
 }
@@ -79,7 +87,7 @@ function addRanking($filename, $score) {
 function getRanking($filename) {
   $lines = file($filename);
   return [
-    "ranking" => array_map(trim, array_slice($lines, 0, 5)),
+    "ranking" => array_map(function($i){ return trim($i); }, array_slice($lines, 0, 5)),
   ];
 }
 

@@ -1,6 +1,46 @@
 # のびるすっぱいぬ
 
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/HibikineKage/dog)
+
 https://hibikine.me/dog/
+
+# Development
+
+## Requirement
+* yarn
+* composer
+* docker-compose
+
+## Installment
+
+```bash
+yarn install
+composer install
+```
+
+それぞれ別コンソールで
+
+```bash
+yarn php-watch
+yarn watch
+docker-compose up -d
+```
+
+その後、 [http://192.168.99.100/dog/](http://192.168.99.100/dog/) にアクセス(アドレスは違うこともある)
+
+止める時は各コンソールで`Ctrl-C`した後に
+
+```bash
+docker-compose stop
+```
+
+# Build
+
+```bash
+yarn install
+composer install
+yarn build
+```
 
 # コーディング規約
 
@@ -20,16 +60,5 @@ https://hibikine.me/dog/
 
 メソッド名、関数名、変数名はlowerCamelCase。
 
-# Development
+定数名はUPPER_SNAKE_CASE。
 
-```bash
-yarn install
-yarn start
-```
-
-# Build
-
-```bash
-yarn install
-yarn build
-```
