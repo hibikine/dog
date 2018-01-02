@@ -71,7 +71,7 @@ function getRanking($pdo, $rankingType, $score = -1) {
   }
   $stmt->execute();
   // NOTE:絶対0番目の添字はあるのでチェック不要
-  $rank = $stmt->fetchAll(PDO::FETCH_COLUMN, 0)[0] + 1;
+  $rank = (int)$stmt->fetchAll(PDO::FETCH_COLUMN, 0)[0];
 
   return [
     "ranking" => $rankingList,
