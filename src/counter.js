@@ -4,24 +4,24 @@ export default class Counter {
     this.actionListeners = [];
     this.$countNum = $('count-num');
   }
-  
+
   // カウンターを増やす
   add(value = 1) {
     this.count += value;
     this.updateCount();
   }
-  
+
   reset() {
     this.count = 0;
     this.updateCount();
   }
-  
+
   // アクションを送信する
   updateCount() {
     this.$countNum.html(this.count);
     this.actionListeners.map(callback => callback(this.count));
   }
-  
+
   // カウントアップ時のイベントリスナーを登録する
   // コールバックの第一引数にcountが入る
   addEventListener(callback) {

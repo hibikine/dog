@@ -5,7 +5,7 @@ export default function initForm(counter) {
   $form.submit(() => {
     const action = $form.attr('action');
     const data = {
-      score: counter.count
+      score: counter.count,
     };
     $.post(action, data, (result) => {
       showRanking(result);
