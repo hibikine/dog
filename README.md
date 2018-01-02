@@ -13,6 +13,10 @@ https://hibikine.me/dog/
 
 ## Installment
 
+`application/keys.sample.php`をコピー、keys.phpにリネームする。
+
+中を開き、TwitterAPIキーを設定。
+
 ```bash
 yarn install
 composer install
