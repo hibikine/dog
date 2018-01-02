@@ -2,7 +2,7 @@ export default class Counter {
   constructor() {
     this.count = 0;
     this.actionListeners = [];
-    this.$countNum = $('count-num');
+    this.$countNum = $('#count-num');
   }
 
   // カウンターを増やす
@@ -18,7 +18,7 @@ export default class Counter {
 
   // アクションを送信する
   updateCount() {
-    this.$countNum.html(this.count);
+    this.$countNum.text(this.count);
     this.actionListeners.map(callback => callback(this.count));
   }
 
