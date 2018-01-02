@@ -6,4 +6,5 @@ php:
 dist: trusty
 sudo: false
 cache: yarn
+install: yarn travis-install
 script: yarn build

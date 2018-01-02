@@ -23,6 +23,7 @@
     "start": "parcel index.html --out-dir dog",
     "watch": "parcel watch index.html --out-dir dog",
     "php-watch": "gulp php-watch",
+    "travis-install": "yarn install && composer install",
     "build": "rm -rf dog/ && mkdir -p dog && cp -rf application/* dog/ && parcel build index.html --out-dir dog",
     "docker-run": "docker build -t dog . && docker run -d --name dog dog",
     "docker-start": "docker start dog",
