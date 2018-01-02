@@ -1,0 +1,13 @@
+language: php
+php:
+- 7.1
+
+before_install:
+  - nvm install node
+  - nvm alias default node
+  - node --version
+dist: trusty
+sudo: false
+cache: yarn
+install: yarn travis-install
+script: yarn build

@@ -1,5 +1,5 @@
-import gulp from 'gulp';
-import plumber from 'gulp-plumber';
+gulp = require('gulp');
+plumber = require('gulp-plumber');
 
 const applicationDir = './application/**/*';
 const destDir = './dog';
