@@ -6,7 +6,9 @@ import { updateMeter, updateResetButton } from './ui';
 const tweetURL = 'https://twitter.com/intent/tweet';
 const scoreURL = '/dog/score.php';
 
-const counter = new Counter();
+const counter = new Counter($('#count-num'));
+counter.addEventListener(updateMeter);
+counter.addEventListener(updateResetButton);
 
 // 伸ばすをクリック
 $('#extend').click(() => {
@@ -38,11 +40,9 @@ $('#reset').click(() => {
   gtag('event', 'send_rank');
 });
 
-counter.addEventListener(updateMeter);
-counter.addEventListener(updateResetButton);
-showVersion();
+showVersion($('#title-version'), $('#version-log'));
 
-const dog = new Dog();
+const dog = new Dog($('#dog'));
 function mainLoop() {
   dog.updateDog(counter.count);
   dog.drawDog();
