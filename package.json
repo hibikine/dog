@@ -6,9 +6,6 @@
   "author": "Hibikine Kage <goodsmile314159@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.36",
-    "@babel/preset-env": "^7.0.0-beta.36",
-    "@babel/register": "^7.0.0-beta.36",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
