@@ -1,104 +1,87 @@
 <?php
+// ランキングファイル
+define('RANKING_FILE', 'ranking.db');
+// 総合ランキング
+define('RANKING_TYPE_ALWAYS', 0);
+// デイリーランキング
+define('RANKING_TYPE_DAILY', 1);
+// 毎時ランキング
+define('RANKING_TYPE_HOURLY', 2);
+// ランキングのリミット
+define('RANKING_LIST_LIMIT', 5);
+// リセット時間(UTC)
+define('RANKING_RESET_HOUR_UTC', 20);
 
-define('RANKING_FILE_NAME', './score.txt');
-define('DAILY_RANKING_FILE_NAME', './daily.txt');
-define('HOURLY_RANKING_FILE_NAME', './hourly.txt');
-define('DAILY_RANKING_UPDATE_FILE', './daily-update.txt');
-define('HOURLY_RANKING_UPDATE_FILE', './hourly-update.txt');
-define('SCORE_TIMEZONE', 'Asia/Tokyo');
-
-date_default_timezone_set(SCORE_TIMEZONE);
-
-// 現在時刻のDateTimeをTimezone設定状態で返す
-function getNow() {
-  $now = new DateTime();
-  return $now;
-}
-
-/**
- * ランキングファイルを消すべきかどうか判断
- * @param $file string ranking update file
- * @return bool
- */
-function isUpdate($file) {
-  $raw = file_get_contents($file);
-  // ランキングファイルの存在チェック
-  if ($raw === FALSE) {
-    return true;
-  }
-  // UnixtimeからDateTimeに変換して比較
-  $date = new DateTime('@' . $raw);
-  $date->setTimeZone(new DateTimeZone(SCORE_TIMEZONE));
-  return $date < getNow();
-}
-
-/**
- * ランキングファイルを消し、次回アップデートの日時を設定
- * @param $rankingFile
- * @param $nextUpdateFile
- * @param $datetime DateTime
- */
-function update($rankingFile, $nextUpdateFile, $datetime) {
-  // ランキングを全て削除
-  file_put_contents($rankingFile, '');
-  // Unixtimeで書き込み
-  file_put_contents($nextUpdateFile, $datetime->format('U'));
-}
-
-// 朝5時にリセット
-define('DAILY_RESET_HOUR', 5);
-
-// デイリーランキングの次回更新日時を計算
-function calcNextDailyUpdateTime() {
-  $updateTime = getNow();
-  if (DAILY_RESET_HOUR < (int)$updateTime->format('H')) {
-    $updateTime->add(new DateInterval('P1D'));
-  }
-  $updateTime->setTime(DAILY_RESET_HOUR, 0);
-  return $updateTime;
-}
-
-// 毎時ランキングの次回更新日時を計算
-function calcNextHourlyUpdateTime() {
-  $updateTime = getNow();
-  $updateTime->setTime((int)$updateTime->format('H') + 1, 0);
-  return $updateTime;
+// データベースを初期化する
+function initDB($pdo) {
+  // NOTE: created_atはUTC
+  $pdo->exec('CREATE TABLE IF NOT EXISTS score_board(score INT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)');
+  $pdo->exec('CREATE INDEX IF NOT EXISTS idx_score ON score_board(score)');
+  $pdo->exec('CREATE INDEX IF NOT EXISTS idx_created_at ON score_board(created_at)');
 }
 
 // ランキングを追加
-function addRanking($filename, $score) {
-  $lines = file($filename);
-  for($i = 0; $i < count($lines); ++$i) {
-    if ((int)$lines[$i] < $score) {
-      array_splice($lines, $i, 0, $score . "\n");
+function addRanking($pdo, $score) {
+  $stmt = $pdo->prepare('INSERT INTO score_board(score) VALUES (:score)');
+  $stmt->bindValue(':score', $score, PDO::PARAM_INT);
+  $stmt->execute();
+}
+
+// ランキングを取得
+// @param int $score 確認したいスコア、-1(未指定)の場合は順位が省略される
+function getRanking($pdo, $rankingType, $score = -1) {
+  $resetHour = 24 - RANKING_RESET_HOUR_UTC;
+  $where = "1=1";
+  $binds = [];
+
+  // ランキングの種類によって条件変更
+  switch ($rankingType) {
+    case RANKING_TYPE_DAILY:
+      // リセット時間が 5:00 JST = -4:00 UTC
+      $where = "created_at > datetime(CURRENT_TIMESTAMP, '+' || :resetHour || ' hours', 'start of day', '+' || :resetHour || ' hours')";
+      $binds['resetHour'] = ['value' => $resetHour, 'type' => PDO::PARAM_INT];
       break;
-    }
+
+    case RANKING_TYPE_HOURLY:
+      $where = "created_at > strftime('%Y-%m-%d %H:00:00', CURRENT_TIMESTAMP)";
+      break;
   }
-  if(count($lines) === $i) {
-    $lines = array_merge($lines, [$score . "\n"]);
+
+  // リスト取得
+  $stmt = $pdo->prepare("SELECT score FROM score_board WHERE $where ORDER BY score DESC LIMIT :limit");
+  $stmt->bindValue(":limit", RANKING_LIST_LIMIT, PDO::PARAM_INT);
+  foreach ($binds as $k => $v) {
+    $stmt->bindValue(":$k", $v['value'], $v['type']);
   }
-  file_put_contents($filename, $lines, LOCK_EX);
+  $stmt->execute();
+  $rankingList = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+
+  if ($score == -1) {
+    return [
+      "ranking" => $rankingList,
+    ];
+  }
+
+  // 順位取得
+  $where = "$where AND score > :score";
+  $stmt = $pdo->prepare("SELECT count(*) FROM score_board WHERE $where");
+  $stmt->bindValue(":score", $score, PDO::PARAM_INT);
+  foreach ($binds as $k => $v) {
+    $stmt->bindValue(":$k", $v['value'], $v['type']);
+  }
+  $stmt->execute();
+  // NOTE:絶対0番目の添字はあるのでチェック不要
+  $rank = $stmt->fetchAll(PDO::FETCH_COLUMN, 0)[0] + 1;
+
   return [
-    "ranking" => array_map(function($i){ return trim($i); }, array_slice($lines, 0, 5)),
-    "rank" => $i,
+    "ranking" => $rankingList,
+    "rank" => $rank,
   ];
 }
 
-function getRanking($filename) {
-  $lines = file($filename);
-  return [
-    "ranking" => array_map(function($i){ return trim($i); }, array_slice($lines, 0, 5)),
-  ];
-}
-
-
-// ランキングリセットが必要かどうか
-if (isUpdate(DAILY_RANKING_UPDATE_FILE)) {
-  update(DAILY_RANKING_FILE_NAME, DAILY_RANKING_UPDATE_FILE, calcNextDailyUpdateTime());
-}
-if (isUpdate(HOURLY_RANKING_UPDATE_FILE)) {
-  update(HOURLY_RANKING_FILE_NAME, HOURLY_RANKING_UPDATE_FILE, calcNextHourlyUpdateTime());
-}
+$pdoOptions = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+$pdo = new PDO('sqlite:' . RANKING_FILE, '', '', $pdoOptions);
+initDB($pdo);
 
 $json = [];
 if (array_key_exists('score', $_POST)) {
@@ -108,11 +91,12 @@ if (array_key_exists('score', $_POST)) {
   if (!ctype_digit($score)) {
     throw Exception();
   }
-  
+
+  addRanking($pdo, $score);
   // ランキング計算
-  $ranking = addRanking(RANKING_FILE_NAME, $score);
-  $dailyRanking = addRanking(DAILY_RANKING_FILE_NAME, $score);
-  $hourlyRanking = addRanking(HOURLY_RANKING_FILE_NAME, $score);
+  $ranking = getRanking($pdo, RANKING_TYPE_ALWAYS, $score);
+  $dailyRanking = getRanking($pdo, RANKING_TYPE_DAILY, $score);
+  $hourlyRanking = getRanking($pdo, RANKING_TYPE_HOURLY, $score);
 
   $json += $ranking;
   $json['lastScore'] = $score;
@@ -120,9 +104,9 @@ if (array_key_exists('score', $_POST)) {
   $json['hourly'] = $hourlyRanking;
 } else {
   // ランキング返すだけ
-  $json += getRanking(RANKING_FILE_NAME);
-  $json['daily'] = getRanking(DAILY_RANKING_FILE_NAME);
-  $json['hourly'] = getRanking(HOURLY_RANKING_FILE_NAME);
+  $json += getRanking($pdo, RANKING_TYPE_ALWAYS);
+  $json['daily'] = getRanking($pdo, RANKING_TYPE_DAILY);
+  $json['hourly'] = getRanking($pdo, RANKING_TYPE_HOURLY);
 }
 header("Content-Type: application/json; charset=utf-8");
 echo json_encode($json);
