@@ -1,3 +1,5 @@
+// TODO: 副作用アリアリなのでクラス化する
+
 let lastNameIndex = 0;
 export default function changeName(meter) {
   const names = [
