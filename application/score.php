@@ -69,7 +69,7 @@ function addRanking($filename, $score) {
   if(count($lines) === $i) {
     $lines = array_merge($lines, [$score . "\n"]);
   }
-  file_put_contents($filename, $lines);
+  file_put_contents($filename, $lines, LOCK_EX);
   return [
     "ranking" => array_map(trim, array_slice($lines, 0, 5)),
     "rank" => $i,
