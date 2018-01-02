@@ -7,5 +7,5 @@ export function updateMeter(count) {
 }
 
 export function updateResetButton(count) {
-  $('#reset').prop("disabled", count == 0);
+  $('#reset').prop('disabled', count === 0);
 }

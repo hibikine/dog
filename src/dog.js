@@ -5,7 +5,7 @@ export default class Dog {
     this.updateDog(0);
     this.drawDog();
   }
-  
+
   updateDog(count) {
     // 目指す長さ
     const targetDogLength = this.dogStatus.defaultLength + count * this.dogStatus.unit;
