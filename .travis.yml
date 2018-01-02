@@ -6,3 +6,4 @@ php:
 dist: trusty
 sudo: false
 cache: yarn
+script: yarn build
