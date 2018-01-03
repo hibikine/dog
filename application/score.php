@@ -12,6 +12,9 @@ define('RANKING_LIST_LIMIT', 5);
 // リセット時間(UTC)
 define('RANKING_RESET_HOUR_UTC', 20);
 
+$currentTimestamp = (new DateTime(null, new DateTimeZone('UTC')))->format("Y-m-d H:i:s");
+// $currentTimestamp = '2006-01-02 15:04:05';
+
 // データベースを初期化する
 function initDB($pdo) {
   // NOTE: created_atはUTC
@@ -22,14 +25,19 @@ function initDB($pdo) {
 
 // ランキングを追加
 function addRanking($pdo, $score) {
-  $stmt = $pdo->prepare('INSERT INTO score_board(score) VALUES (:score)');
+  global $currentTimestamp;
+
+  $stmt = $pdo->prepare('INSERT INTO score_board(score, created_at) VALUES (:score, :currentTimestamp)');
   $stmt->bindValue(':score', $score, PDO::PARAM_INT);
+  $stmt->bindValue(':currentTimestamp', $currentTimestamp, PDO::PARAM_STR);
   $stmt->execute();
 }
 
 // ランキングを取得
 // @param int $score 確認したいスコア、-1(未指定)の場合は順位が省略される
 function getRanking($pdo, $rankingType, $score = -1) {
+  global $currentTimestamp;
+
   $resetHour = 24 - RANKING_RESET_HOUR_UTC;
   $where = "1=1";
   $binds = [];
@@ -38,12 +46,14 @@ function getRanking($pdo, $rankingType, $score = -1) {
   switch ($rankingType) {
     case RANKING_TYPE_DAILY:
       // リセット時間が 5:00 JST = -4:00 UTC
-      $where = "created_at > datetime(CURRENT_TIMESTAMP, '+' || :resetHour || ' hours', 'start of day', '-' || :resetHour || ' hours')";
+      $where = "created_at >= datetime(:currentTimestamp, '+' || :resetHour || ' hours', 'start of day', '-' || :resetHour || ' hours')";
       $binds['resetHour'] = ['value' => $resetHour, 'type' => PDO::PARAM_INT];
+      $binds['currentTimestamp'] = ['value' => $currentTimestamp, 'type' => PDO::PARAM_STR];
       break;
 
     case RANKING_TYPE_HOURLY:
-      $where = "created_at > strftime('%Y-%m-%d %H:00:00', CURRENT_TIMESTAMP)";
+      $where = "created_at >= strftime('%Y-%m-%d %H:00:00', :currentTimestamp)";
+      $binds['currentTimestamp'] = ['value' => $currentTimestamp, 'type' => PDO::PARAM_STR];
       break;
   }
 
