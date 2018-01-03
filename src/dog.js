@@ -1,7 +1,7 @@
 export default class Dog {
-  constructor() {
-    this.dogStatus = Dog.defaultDogStatus;
-    this.$dog = $('#dog');
+  constructor($dog) {
+    this.dogStatus = Object.assign({}, Dog.defaultDogStatus);
+    this.$dog = $dog;
     this.updateDog(0);
     this.drawDog();
   }

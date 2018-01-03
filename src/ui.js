@@ -2,7 +2,7 @@ import changeName from './names';
 
 export function updateMeter(count) {
   const meter = 1 + count / 2;
-  $('#meter').html(`${meter}m`);
+  $('#meter').text(`${meter}m`);
   changeName(meter);
 }
 

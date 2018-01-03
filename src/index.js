@@ -1,31 +1,51 @@
 import Dog from './dog';
 import showVersion from './version';
 import Counter from './counter';
-import initForm from './form';
 import { updateMeter, updateResetButton } from './ui';
 
-const counter = new Counter();
+const tweetURL = 'https://twitter.com/intent/tweet';
+const scoreURL = '/dog/score.php';
 
+const counter = new Counter($('#count-num'));
+counter.addEventListener(updateMeter);
+counter.addEventListener(updateResetButton);
+
+// 伸ばすをクリック
 $('#extend').click(() => {
   counter.add();
 });
 
+// つぶやくをクリック
 $('#twitter').click(() => {
-  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(`すっぱいぬ🐶を${counter.count}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`)}`, '_blank');
+  const queryObj = {
+    text: `すっぱいぬ🐶を${counter.count}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`
+  };
+  const query = $.param(paramObj);
+  const url = `${tweetURL}?${query}`;
+  window.open(url, '_blank');
 });
 
-initForm(counter);
-counter.addEventListener(updateMeter);
-counter.addEventListener(updateResetButton);
-showVersion();
+// すっぱりセットをクリック
+$('#reset').click(() => {
+  const action = scoreURL;
+  const data = {
+    score: counter.count,
+  };
+  // スコア送信
+  $.post(action, data, (result) => {
+    showRanking(result);
+  }, 'json');
 
-const dog = new Dog();
+  counter.reset();
+  gtag('event', 'send_rank');
+});
+
+showVersion($('#title-version'), $('#version-log'));
+
+const dog = new Dog($('#dog'));
 function mainLoop() {
   dog.updateDog(counter.count);
   dog.drawDog();
-  window.requestAnimationFrame(() => {
-    mainLoop();
-  });
+  window.requestAnimationFrame(mainLoop);
 }
 mainLoop();
-
