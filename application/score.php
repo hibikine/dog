@@ -38,7 +38,7 @@ function getRanking($pdo, $rankingType, $score = -1) {
   switch ($rankingType) {
     case RANKING_TYPE_DAILY:
       // リセット時間が 5:00 JST = -4:00 UTC
-      $where = "created_at > datetime(CURRENT_TIMESTAMP, '+' || :resetHour || ' hours', 'start of day', '+' || :resetHour || ' hours')";
+      $where = "created_at > datetime(CURRENT_TIMESTAMP, '+' || :resetHour || ' hours', 'start of day', '-' || :resetHour || ' hours')";
       $binds['resetHour'] = ['value' => $resetHour, 'type' => PDO::PARAM_INT];
       break;
 
