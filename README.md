@@ -1,6 +1,6 @@
 # のびるすっぱいぬ
 
-[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/HibikineKage/dog)
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/HibikineKage/dog) [![Build Status](https://travis-ci.org/HibikineKage/dog.svg?branch=master)](https://travis-ci.org/HibikineKage/dog)
 
 https://hibikine.me/dog/
 
