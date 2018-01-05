@@ -1,4 +1,5 @@
 import Dog from './dog';
+import showRanking from './ranking';
 import showVersion from './version';
 import Counter from './counter';
 import { updateMeter, updateResetButton } from './ui';
@@ -20,7 +21,7 @@ $('#twitter').click(() => {
   const queryObj = {
     text: `すっぱいぬ🐶を${counter.count}回伸ばしました！ https://hibikine.me/dog/ #のびるすっぱいぬ`
   };
-  const query = $.param(paramObj);
+  const query = $.param(queryObj);
   const url = `${tweetURL}?${query}`;
   window.open(url, '_blank');
 });
