@@ -40,5 +40,5 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo "${HOST_NAME} ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFIWQrws6JkqUq4w0s0yRArM5s/pmwnmOnVo9q/PINcz8kyY0n6H4BjQwTtRNbmUexUgkn5VqG1oFvEsHLK77qE=" >> ~/.ssh/known_hosts
               sudo apt install -y rsync
-              rsync -avn ./dog/ ${USER_NAME}@${HOST_NAME}:~/www/hibikine/dog/
+              rsync -av ./dog/ ${USER_NAME}@${HOST_NAME}:~/www/hibikine/dog/
             fi
