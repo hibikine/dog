@@ -1,0 +1,44 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - add_ssh_keys:
+          fingerprints:
+            - "af:e0:c1:a2:bc:de:f2:1b:23:b1:c3:39:09:1c:18:ee"
+      - run:
+          name: Update npm
+          command: "sudo npm install -g npm@latest"
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      #- run:
+      #    name: Linting
+      #    command: yarn lint
+      #- run: # run tests
+      #    name: Test
+      #    command: yarn test-ci
+      - run: # build
+          name: Build
+          command: yarn build
+      - deploy:
+          name: Master deployment
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo "${HOST_NAME} ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFIWQrws6JkqUq4w0s0yRArM5s/pmwnmOnVo9q/PINcz8kyY0n6H4BjQwTtRNbmUexUgkn5VqG1oFvEsHLK77qE=" >> ~/.ssh/known_hosts
+              sudo apt install -y rsync
+              rsync -avn ./dog/ ${USER_NAME}@${HOST_NAME}:~/www/hibikine/dog/
+            fi
