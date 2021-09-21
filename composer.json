@@ -1,7 +1,7 @@
 {
     "name": "hibikinekage/dog",
     "require": {
-        "abraham/twitteroauth": "^0.7.4"
+        "abraham/twitteroauth": "^1.1.0"
     },
     "license": "MIT",
     "authors": [
